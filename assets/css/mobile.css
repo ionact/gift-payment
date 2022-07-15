@@ -1395,4 +1395,12 @@
   .modal-terms-body.delete_confirm {
     bottom: 11.1112vw !important;
   }
+
+  .modal-content.delete-h36 {
+    border-radius: 0 !important;
+  }
+
+  .modal-content.nickname-edit-content {
+    max-width: 100% !important;
+  }
 }

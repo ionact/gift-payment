@@ -3,6 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="b12a4987-93e0-4e82-9f8f-470300081b79" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/css/mobile.css" beforeDir="false" afterPath="$PROJECT_DIR$/assets/css/mobile.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -23,7 +24,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="D:/_2021/10_01_cameraFi_live/front-end" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
   </component>
   <component name="ServiceViewManager">
     <option name="viewStates">
@@ -50,6 +51,7 @@
       <workItem from="1657793602222" duration="31917000" />
       <workItem from="1657848400472" duration="12680000" />
       <workItem from="1657876785134" duration="22255000" />
+      <workItem from="1657907658433" duration="693000" />
     </task>
     <servers />
   </component>
