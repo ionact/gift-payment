@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Payment Connection</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+  <script src="./assets/js/jquery-3.5.1.js"></script>
+  <script src="./assets/js/jquery3.5.1.min.js"></script>
+  <script src="./assets/js/main.js"></script>
+  <link rel="stylesheet" href="assets/css/home.css">
+</head>
+
+<body class="h100p">
+<div class="page-body">
+  <div class="page-container">
+    <div class="body-h100">
+      <!--  헤더    -->
+      <header class="sticky-top">
+        <div class="pr16 pl16 h52 flex-space">
+          <div class="justify-left">
+            <div class="account_email_close justify-left">
+              <img src="assets/images/back_20.svg" class="img20 mouse-cursor" alt=""/>
+            </div>
+            <span class="pl8 font-noto500 font20 col-77">계좌연결</span>
+          </div>
+          <div class="account_email_close justify-right">
+            <img src="assets/images/close_20.svg" class="img20 mouse-cursor" alt=""/>
+          </div>
+        </div>
+        <div class="stick2">
+          <div class="progress-stick" style="width: 80%;"></div>
+        </div>
+      </header>
+
+      <section class="pt24 pb32 h124-remain bg-f5">
+        <div class="pr16 pl16 font16 col-00">
+          <div class="font-noto700">이메일 주소를 확인 후</div>
+          <div class="font-noto400"><span class="font-noto700">약관에 동의</span>해 주세요.</div>
+        </div>
+
+        <div class="pt24">
+          <div class="mt10 pr16 pl16 nickname-body flex-space">
+            <label for="email_input"></label>
+            <input id="email_input" type="email" class="input_min10 font-noto400 font16 col-00"
+                   placeholder="이메일 주소를 입력해주세요"/>
+            <div class="btn-input-close hide">
+              <img id="email_clear" src="assets/images/x_cirlcle_close.svg" class="img16 mouse-cursor" alt=""/>
+            </div>
+          </div>
+
+          <div class="invalid_email pt6 pr16 pl16 font-noto400 font12 col-cc hide">
+            잘못된 이메일 형식입니다.
+          </div>
+
+          <div class="pt24 pr24 pl24 font-noto300 font13 col-00">
+            <span class="pr5">•</span> 이 주소로 금융 거래 조회 내역을 보내드립니다.
+          </div>
+          <div class="mt24 border-bottom-db"></div>
+
+          <div class="pt24 pr24 pb24 pl24 font-noto400 font14 col-00">
+            <div id="terms1" class="text-underline mouse-cursor">오픈뱅킹 서비스 이용 약관 (필수)</div>
+            <div id="terms2" class="pt16 text-underline mouse-cursor">금융 정보 조회 약관 (필수)</div>
+            <div id="terms3" class="pt16 text-underline mouse-cursor">자동 계좌 이체 약관 (필수)</div>
+            <div id="terms4" class="pt16 text-underline mouse-cursor">개인(신용)정보 수집 / 이용 / 제공 동의 (필수)</div>
+            <div id="terms5" class="pt16 text-underline mouse-cursor">금융 거래 정보 제공 동의 (필수)</div>
+          </div>
+        </div>
+      </section>
+
+      <footer class="h72 pt8 pr16 pb16 pl16">
+        <div id="btn_email_next" class="btn-next box-shadow font-noto700 font16 col-ff mouse-cursor">모두 동의하고 연결하기</div>
+      </footer>
+
+      <!-- 이용약관 팝업 표시 -->
+      <div class="modal-terms-body terms_popup hide">
+        <div class="modal-terms-content animate-zoom">
+          <div class="modal-h68 pr24 pl24 flex-space">
+            <div class="img20"></div>
+            <div id="popup_title"></div>
+            <img id="terms_modal_close" src="assets/images/close_20.svg" class="img20 mouse-cursor" alt=""/>
+          </div>
+
+          <!--   팝업 컨텐츠는 이 부분에 아래처럼 기재해주시면 됩니다.   -->
+          <section class="pr16 pb24 pl16 modal68-remain">
+            <div class="pt8 font-noto700 font14 col-00">제 1장 총칙</div>
+
+            <div class="pt16 font-noto300 font14 col-5c">
+              제 1조(목적)
+            </div>
+            <div class="pt12 font-noto300 font14 col-5c">
+              내용 여기에 내용 여기에 내용 여기에 내용 여기에 내용 여기에 내용 여기에 내용 여기에 내용 여기에 내용 여기에 내용 여기에 내용 여기에 내용 여기에 내용 여기에 내용 여기에 내용 여기에
+              내용 여기에 내용 여기에 내용 여기에 내용 여기에 내용 여기에 내용 여기에 내용 여기에 내용 여기에 내용 여기에 내용 여기에 내용 여기에 내용 여기에 내용 여기에 내용 여기에 내용 여기에
+              내용 여기에 내용 여기에 내용 여기에 내용 여기에 내용 여기에 내용 여기에 내용 여기에 내용 여기에 내용 여기에 내용 여기에 내용 여기에 내용 여기에 내용 여기에 내용 여기에 내용 여기에
+              내용 여기에 내용 여기에 내용 여기에 내용 여기에 내용 여기에 내용 여기에 내용 여기에 내용 여기에 내용 여기에 내용 여기에 내용 여기에 내용 여기에 내용 여기에 내용 여기에 내용 여기에
+              내용 여기에 내용 여기에 내용 여기에 내용 여기에 내용 여기에 내용 여기에 내용 여기에 내용 여기에 내용 여기에 내용 여기에 내용 여기에 내용 여기에 내용 여기에 내용 여기에 내용 여기에
+              내용 여기에 내용 여기에 내용 여기에 내용 여기에 내용 여기에 내용 여기에 내용 여기에 내용 여기에 내용 여기에 내용 여기에 내용 여기에 내용 여기에 내용 여기에 내용 여기에 내용 여기에
+              내용 여기에 내용 여기에 내용 여기에 내용 여기에 내용 여기에 내용 여기에 내용 여기에 내용 여기에 내용 여기에 내용 여기에 내용 여기에 내용 여기에 내용 여기에 내용 여기에 내용 여기에
+              내용 여기에 내용 여기에 내용 여기에 내용 여기에 내용 여기에 내용 여기에 내용 여기에 내용 여기에 내용 여기에 내용 여기에 내용 여기에 내용 여기에 내용 여기에 내용 여기에 내용 여기에
+            </div>
+
+            <div class="pt16 font-noto300 font14 col-5c">
+              제 2조(목적)
+            </div>
+            <div class="pt12 font-noto300 font14 col-5c">
+              내용 여기에 내용 여기에 내용 여기에 내용 여기에 내용 여기에 내용 여기에 내용 여기에 내용 여기에 내용 여기에 내용 여기에 내용 여기에 내용 여기에 내용 여기에 내용 여기에 내용 여기에
+              내용 여기에 내용 여기에 내용 여기에 내용 여기에 내용 여기에 내용 여기에 내용 여기에 내용 여기에 내용 여기에 내용 여기에 내용 여기에 내용 여기에 내용 여기에 내용 여기에 내용 여기에
+              내용 여기에 내용 여기에 내용 여기에 내용 여기에 내용 여기에 내용 여기에 내용 여기에 내용 여기에 내용 여기에 내용 여기에 내용 여기에 내용 여기에 내용 여기에 내용 여기에 내용 여기에
+              내용 여기에 내용 여기에 내용 여기에 내용 여기에 내용 여기에 내용 여기에 내용 여기에 내용 여기에 내용 여기에 내용 여기에 내용 여기에 내용 여기에 내용 여기에 내용 여기에 내용 여기에
+              내용 여기에 내용 여기에 내용 여기에 내용 여기에 내용 여기에 내용 여기에 내용 여기에 내용 여기에 내용 여기에 내용 여기에 내용 여기에 내용 여기에 내용 여기에 내용 여기에 내용 여기에
+              내용 여기에 내용 여기에 내용 여기에 내용 여기에 내용 여기에 내용 여기에 내용 여기에 내용 여기에 내용 여기에 내용 여기에 내용 여기에 내용 여기에 내용 여기에 내용 여기에 내용 여기에
+              내용 여기에 내용 여기에 내용 여기에 내용 여기에 내용 여기에 내용 여기에 내용 여기에 내용 여기에 내용 여기에 내용 여기에 내용 여기에 내용 여기에 내용 여기에 내용 여기에 내용 여기에
+              내용 여기에 내용 여기에 내용 여기에 내용 여기에 내용 여기에 내용 여기에 내용 여기에 내용 여기에 내용 여기에 내용 여기에 내용 여기에 내용 여기에 내용 여기에 내용 여기에 내용 여기에
+            </div>
+
+          </section>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<script>
+  /**
+   * 패스로부터 선택된 계좌 인덱스 얻어내기
+   */
+  let urlParams = new URLSearchParams(window.location.search);
+  let accountIndex = urlParams.get("accountIndex");
+
+  document.getElementById('email_input').focus();
+
+  /**
+   * back버튼 클릭시
+   */
+  $("div.account_email_close").on('click', function () {
+    if (accountIndex) {
+      window.location.href = './account_nickname_setting.html?accountIndex=' + accountIndex;
+    }
+  });
+
+  /**
+   * 닉네임 입력상태에 따르는 다음 버튼 활성화하기
+   */
+  $("#email_input").on("input", function () {
+    if ($(this).val()) {
+      $("div.btn-input-close").removeClass('hide');
+      $("div.btn-next").addClass('btn-active');
+    } else {
+      $("div.btn-next").removeClass('btn-active');
+      $("div.btn-input-close").addClass('hide');
+    }
+  });
+
+  /** 이메일 클린하기 **/
+  $('#email_clear').click(function () {
+    document.getElementById('email_input').value = '';
+    $("div.btn-next").removeClass('btn-active');
+    $("div.btn-input-close").addClass('hide');
+    $("div.invalid_email").addClass('hide');
+    $("#email_input").removeClass('error-border');
+    document.getElementById('email_input').focus();
+  });
+
+  /**
+   * 다음 버튼 클릭시
+   * 임시로 에러 워딩 적어도 한번 표시해주고 다음 페이지로 이동되게 구현됨
+   */
+  $('#btn_email_next').click(function () {
+    /** 다음 버튼 활성화 상태인지 체크 **/
+    let email = document.getElementById('email_input').value;
+    if (email) {
+      const emailValidation = /[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$/;
+      if (!emailValidation.test(email)) {
+        /** 잘못된 이메일 타입이면 **/
+        $("div.invalid_email").removeClass('hide');
+        $("#email_input").addClass('error-border');
+        document.getElementById('email_input').focus();
+      } else {
+        /** 이메일타입이 타당한 경우 **/
+        $("div.invalid_email").addClass('hide');
+        $("div.btn-input-close").addClass('hide');
+        $("#email_input").removeClass('error-border');
+        window.location.href = "add_account_complete.html?accountIndex=" + accountIndex;
+      }
+    }
+  });
+
+  /**
+   * 오픈뱅킹 서비스 이용약관 필수
+   */
+  $('#terms1').click(function () {
+    document.getElementById('popup_title').innerHTML =
+        `<div class="font-noto400 font16 col-00">오픈뱅킹 서비스 이용 약관</div>`;
+    $("div.terms_popup").removeClass('hide');
+  });
+  /**
+   * 금융 정보 조회 약관 (필수)
+   */
+  $('#terms2').click(function () {
+    document.getElementById('popup_title').innerHTML =
+        `<div class="font-noto400 font16 col-00">금융 정보 조회 약관</div>`;
+    $("div.terms_popup").removeClass('hide');
+  });
+  /**
+   * 자동 계좌 이체 약관 (필수)
+   */
+  $('#terms3').click(function () {
+    document.getElementById('popup_title').innerHTML =
+        `<div class="font-noto400 font16 col-00">자동 계좌 이체 약관</div>`;
+    $("div.terms_popup").removeClass('hide');
+  });
+  /**
+   * 개인(신용)정보 수집 / 이용 / 제공 동의 (필수)
+   */
+  $('#terms4').click(function () {
+    document.getElementById('popup_title').innerHTML =
+        `<div class="font-noto400 font16 col-00">개인(신용)정보 수집 / 이용 / 제공 동의</div>`;
+    $("div.terms_popup").removeClass('hide');
+  });
+  /**
+   * 금융 거래 정보 제공 동의 (필수)
+   */
+  $('#terms5').click(function () {
+    document.getElementById('popup_title').innerHTML =
+        `<div class="font-noto400 font16 col-00">금융 거래 정보 제공 동의</div>`;
+    $("div.terms_popup").removeClass('hide');
+  });
+
+  /**
+   * 약관 팝업에서 X버튼 클릭시
+   */
+  $("#terms_modal_close").click(function () {
+    $("div.terms_popup").addClass('hide');
+  });
+</script>
+</body>
+</html>

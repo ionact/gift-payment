@@ -1,0 +1,37 @@
+@import url("https://fonts.googleapis.com/css?family=Poppins:400,500,600,700,800&display=swap");
+/*@import url("https://fonts.googleapis.com/css2?family=Noto+Sans&family=Noto+Sans+KR:wght@300;400;500;700;800&display=swap");*/
+
+@font-face {
+  font-family: 'NotoSansCJKkr-Light';
+  font-style: normal;
+  src: local('NotoSansCJKkr-Light'), url('../fonts/NotoSansCJKkr-Light.otf');
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'NotoSansCJKkr-Medium';
+  font-style: normal;
+  src: local('NotoSansCJKkr-Medium'), url('../fonts/NotoSansCJKkr-Medium.otf');
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'NotoSansCJKkr-Regular';
+  font-style: normal;
+  src: local('NotoSansCJKkr-Regular'), url('../fonts/NotoSansCJKkr-Regular.otf');
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'NotoSansCJKkr-Thin';
+  font-style: normal;
+  src: local('NotoSansCJKkr-Thin'), url('../fonts/NotoSansCJKkr-Thin.otf');
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'NotoSansCJKkr-Bold';
+  font-style: normal;
+  src: local('NotoSansCJKkr-Bold'), url('../fonts/NotoSansMonoCJKkr-Bold.otf');
+  font-display: swap;
+}

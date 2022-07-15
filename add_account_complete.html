@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Payment Connection</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+  <script src="./assets/js/jquery-3.5.1.js"></script>
+  <script src="./assets/js/jquery3.5.1.min.js"></script>
+  <script src="./assets/js/main.js"></script>
+  <link rel="stylesheet" href="assets/css/home.css">
+</head>
+
+<body class="h100p">
+<div class="page-body">
+  <div class="page-container">
+    <div class="body-h100">
+      <!--  헤더    -->
+      <header class="sticky-top">
+        <div class="pr16 pl16 h52 flex-space">
+          <div class="justify-left">
+            <div class="add_account_complete justify-left">
+              <img src="assets/images/back_20.svg" class="img20 mouse-cursor" alt=""/>
+            </div>
+            <span class="pl8 font-noto500 font20 col-77">계좌연결</span>
+          </div>
+          <div class="add_account_complete justify-right">
+            <img src="assets/images/close_20.svg" class="img20 mouse-cursor" alt=""/>
+          </div>
+        </div>
+        <div class="stick2">
+          <div class="progress-stick" style="width: 100%;"></div>
+        </div>
+      </header>
+
+      <section class="pt80 pb32 h124-remain bg-f5">
+        <div class="flex-column">
+          <div id="add_account_img"></div>
+          <div class="pt24 font-noto400 font24 col-00">
+            <div id="account_title"></div>
+            <div>연결 되었습니다.</div>
+          </div>
+          <div class="pt24 font-noto300 font14 col-00 align-center">
+            <div>연결한 은행에서 자동이체 안내 문자와</div>
+            <div>오픈 뱅킹 등록 안내 문자가</div>
+            <div>발송될 예정입니다.</div>
+          </div>
+        </div>
+      </section>
+
+      <footer class="h72 pt8 pr16 pb16 pl16">
+        <div class="add_account_complete btn-next btn-active box-shadow font-noto700 font16 col-ff mouse-cursor">확인
+        </div>
+      </footer>
+    </div>
+  </div>
+</div>
+
+<script>
+  /**
+   * 패스로부터 선택된 계좌 인덱스 얻어내기
+   */
+  let urlParams = new URLSearchParams(window.location.search);
+  let accountIndex = urlParams.get("accountIndex");
+
+  if (accountIndex) {
+    document.getElementById('add_account_img').innerHTML = `<img src="` + paymentAccounts[accountIndex - 1].img + `" class="img60" alt=""/>`;
+    document.getElementById('account_title').innerHTML = `<div><span class="txt-bold">` + paymentAccounts[accountIndex - 1].name + `</span> 계좌가</div>`;
+  }
+  /**
+   * back버튼 클릭시
+   */
+  $("div.add_account_complete").on('click', function () {
+    if (accountIndex) {
+      // 계좌연결이 완료된 상태이므로, 뒤로가기, X버튼, 확인버튼 클릭시 닫히면서, 원래 있었던 화면으로 이동함.(유찜의 ‘충전하기’, ‘인출하기’ 등 기존 화면으로 이동함)
+      // 현재는 임시로 첫 페이지로 이동시킴
+      window.location.href = './index.html?accountIndex=' + accountIndex;
+    }
+  });
+
+</script>
+</body>
+</html>

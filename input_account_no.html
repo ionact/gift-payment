@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Payment Connection</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+  <script src="./assets/js/jquery-3.5.1.js"></script>
+  <script src="./assets/js/jquery3.5.1.min.js"></script>
+  <script src="./assets/js/main.js"></script>
+  <link rel="stylesheet" href="assets/css/home.css">
+</head>
+
+<body class="h100p">
+<div class="page-body">
+  <div class="page-container">
+    <div class="body-h100">
+      <!--  헤더    -->
+      <header class="sticky-top">
+        <div class="pr16 pl16 h52 flex-space">
+          <div class="justify-left">
+            <a href="select_account.html" class="justify-left">
+              <img src="assets/images/back_20.svg" class="img20 mouse-cursor" alt=""/>
+            </a>
+            <span class="pl8 font-noto500 font20 col-77">계좌연결</span>
+          </div>
+          <a href="select_account.html" class="justify-right">
+            <img src="assets/images/close_20.svg" class="img20 mouse-cursor" alt=""/>
+          </a>
+        </div>
+        <div class="stick2">
+          <div class="progress-stick" style="width: 40%;"></div>
+        </div>
+      </header>
+
+      <section class="pt24 pr16 pb32 pl16 input-body bg-f5">
+        <div class="font16 col-00">
+          <span class="font-noto700">계좌번호를 입력해 </span>
+          <span class="font-noto400">주세요.</span>
+        </div>
+        <div class="pb32 font-noto400 font16 col-00">본인명의 계좌만 연결할 수 있습니다.</div>
+
+        <div id="account_input"></div>
+        <div class="pr5 font-noto300 font13 col-00 letter04">
+          <div class="pt24 flex-common">
+            <span class="dot-w20">•</span>
+            <span class="dot-remain-w20">아래 계좌는 연결할 수 없어요</span>
+          </div>
+          <div class="pt12 flex-common">
+            <span class="dot-w20">•</span>
+            <span class="dot-remain-w20">휴대폰 번호 등으로 만들어진 평생 계좌번호, 정기 예금, 적금, 회차번호 보유 계좌</span>
+          </div>
+          <div class="pt12 flex-common">
+            <span class="dot-w20">•</span>
+            <span class="dot-remain-w20">선불전자지금수단 기반의 가상 계좌 (카카오뱅크 mini 등)</span>
+          </div>
+        </div>
+      </section>
+
+      <footer class="account-bottom pt8 pr16 pb16 pl16">
+        <div id="btn_account_no_next" class="btn-next font-noto700 font16 col-ff mouse-cursor">다음</div>
+      </footer>
+    </div>
+  </div>
+
+  <!-- 오류 팝업 표시 -->
+  <div class="modal-body hide">
+    <div class="modal-content animate-zoom modal-h213">
+      <div class="h44-remain flex-column">
+        <div id="error1" class="font-noto500 font15 col-00"></div>
+        <div id="error2" class="pt5 font-noto500 font15 col-00"></div>
+      </div>
+      <div id="error_modal_close" class="h44 btn-modal-ok font-noto700 font16 col-49 mouse-cursor">
+        확인
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  /**
+   * 패스로부터 선택된 계좌 인덱스 얻어내기
+   */
+  let urlParams = new URLSearchParams(window.location.search);
+  let accountIndex = urlParams.get("accountIndex");
+  if (accountIndex) {
+    console.log(paymentAccounts[accountIndex - 1]);
+    document.getElementById('account_input').innerHTML =
+        `<div class="account-input-body" style="background-image: url(` + paymentAccounts[accountIndex - 1]?.img + `), url('assets/images/down_16.svg');">
+          <label for="account_no"></label>
+          <input id="account_no" min="0" maxlength="20" type="number" class="account-input font14" placeholder="계좌번호 입력">
+        </div>`;
+    document.getElementById('account_no').focus();
+  }
+
+  /** 계좌번호 입력상태에 따르는 다음 버튼 활성화하기 **/
+  $("#account_no").on("input", function () {
+    if ($(this).val()) {
+      $("div.btn-next").addClass('btn-active');
+    } else {
+      $("div.btn-next").removeClass('btn-active');
+    }
+  });
+
+  /** 다음 버튼 클릭시 **/
+  $('#btn_account_no_next').click(function () {
+    /** 다음 버튼 활성상태인지 체크하기 **/
+    if ($("#account_no").val()) {
+      /**
+       * 확인을 위해서 선택된 아이콘 인덱스가
+       * 5보다 작으르 때만 에러 팝업 표시해줌
+       * 5보다 클 때는 ARS페이지로 이동시킴
+       */
+      if (accountIndex < 5) {
+        $("div.modal-body").removeClass('hide');
+        document.getElementById('error1').innerHTML = `<span>` + Error_Messages[accountIndex % 5].first + `</span>`;
+        document.getElementById('error2').innerHTML = `<span>` + Error_Messages[accountIndex % 5].second + `</span>`;
+      } else {
+        window.location.href = './ars_certi.html?accountIndex=' + accountIndex;
+      }
+    }
+  });
+
+  /** 확인 버튼 클릭시 **/
+  $('#error_modal_close').click(function () {
+    $("div.modal-body").addClass('hide');
+  });
+
+</script>
+</body>
+</html>

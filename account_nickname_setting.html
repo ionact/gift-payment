@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Payment Connection</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+  <script src="./assets/js/jquery-3.5.1.js"></script>
+  <script src="./assets/js/jquery3.5.1.min.js"></script>
+  <script src="./assets/js/main.js"></script>
+  <link rel="stylesheet" href="assets/css/home.css">
+</head>
+
+<body class="h100p">
+<div class="page-body">
+  <div class="page-container">
+    <div class="body-h100">
+      <!--  헤더    -->
+      <header class="sticky-top">
+        <div class="pr16 pl16 h52 flex-space">
+          <div class="justify-left">
+            <div class="account_nickname_close justify-left">
+              <img src="assets/images/back_20.svg" class="img20 mouse-cursor" alt=""/>
+            </div>
+            <span class="pl8 font-noto500 font20 col-77">계좌연결</span>
+          </div>
+          <div class="account_nickname_close justify-right">
+            <img src="assets/images/close_20.svg" class="img20 mouse-cursor" alt=""/>
+          </div>
+        </div>
+        <div class="stick2">
+          <div class="progress-stick" style="width: 80%;"></div>
+        </div>
+      </header>
+
+      <section class="pt24 pr16 pb32 pl16 h124-remain bg-f5">
+        <div class="font16 col-00">
+          <div class="font-noto400">유찜머니 충전시에 알아보기 쉽게</div>
+          <div class="font-noto700">계좌의 별명을 등록해 주세요.</div>
+        </div>
+
+        <div class="pt24">
+          <div id="account_number"></div>
+
+          <div class="mt10 nickname-body flex-space">
+            <label for="nickname_input"></label>
+            <input id="nickname_input" type="text" class="input_min10 font-noto400 font16 col-00" maxlength="10"
+                   placeholder="최대 10자 이내로 입력해 주세요."/>
+            <div class="btn-input-close hide">
+              <img id="nickname_clear" src="assets/images/x_cirlcle_close.svg" class="img16 mouse-cursor" alt=""/>
+            </div>
+          </div>
+
+          <div class="nickname_exit pt6 font-noto400 font12 col-cc hide">
+            이미 존재하는 별명입니다. 다른 별명을 사용해주세요.
+          </div>
+          <div class="nickname_spacial_letters pt6 font-noto400 font12 col-cc hide">
+            특수문자를 제외하고 10자 이내로 입력해 주세요.
+          </div>
+          <!--    확인을 위해 임시로 이용되는 필드      -->
+          <input type="hidden" id="temp_nickname_error">
+        </div>
+      </section>
+
+      <footer class="h72 pt8 pr16 pb16 pl16">
+        <div id="btn_nickname_next" class="btn-next box-shadow font-noto700 font16 col-ff mouse-cursor">다음</div>
+      </footer>
+    </div>
+  </div>
+</div>
+
+<script>
+  /**
+   * 패스로부터 선택된 계좌 인덱스 얻어내기
+   */
+  let urlParams = new URLSearchParams(window.location.search);
+  let accountIndex = urlParams.get("accountIndex");
+  if (accountIndex) {
+    document.getElementById('account_number').innerHTML = `<div class="font-noto400 font11 col-8f">` + paymentAccounts[accountIndex - 1].name + ` 3021046271711</div>`;
+    document.getElementById('nickname_input').focus();
+  }
+
+  /**
+   * back버튼 클릭시
+   */
+  $("div.account_nickname_close").on('click', function () {
+    if (accountIndex) {
+      window.location.href = './one_wen_certi.html?accountIndex=' + accountIndex;
+    }
+  });
+
+  /**
+   * 닉네임 입력상태에 따르는 다음 버튼 활성화하기
+   */
+  $("#nickname_input").on("input", function () {
+    /** 입력시 3자리까지로 제한주기 **/
+    document.getElementById('nickname_input').value = $(this).val().slice(0, 10);
+
+    if ($(this).val()) {
+      $("div.btn-input-close").removeClass('hide');
+      $("div.btn-next").addClass('btn-active');
+    } else {
+      $("div.btn-next").removeClass('btn-active');
+      $("div.btn-input-close").addClass('hide');
+    }
+  });
+
+  /** 닉네임 클린하기 **/
+  $('#nickname_clear').click(function () {
+    document.getElementById('nickname_input').value = '';
+    $("div.btn-next").removeClass('btn-active');
+    $("div.btn-input-close").addClass('hide');
+
+    $("div.nickname_exit").addClass('hide');
+    $("div.nickname_spacial_letters").addClass('hide');
+    $("#nickname_input").removeClass('error-border');
+
+    document.getElementById('nickname_input').focus();
+  });
+
+  /**
+   * 다음 버튼 클릭시
+   * 임시로 에러 워딩 적어도 한번 표시해주고 다음 페이지로 이동되게 구현됨
+   */
+  $('#btn_nickname_next').click(function () {
+    /** 다음 버튼 활성화 상태인지 체크 **/
+    let nickname = document.getElementById('nickname_input').value;
+    if (nickname) {
+      const specialChars = /[`!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/;
+      if (specialChars.test(nickname)) {
+        /** 특수문자를 포함하면 **/
+        $("div.nickname_exit").addClass('hide');
+        $("div.nickname_spacial_letters").removeClass('hide');
+        $("#nickname_input").addClass('error-border');
+
+        document.getElementById('temp_nickname_error').value = 1;
+      } else {
+        /** 특수문자를 포함하지 않으면 **/
+        let hiddenValue = document.getElementById('temp_nickname_error').value;
+        if (hiddenValue && Number(hiddenValue) === 1) {
+          /** 적어도 한번 에러를 표시해주었으면 다음 페이지로 이동시키기 **/
+          window.location.href = 'terms_agree.html?accountIndex=' + accountIndex;
+        } else {
+          $("div.nickname_exit").removeClass('hide');
+          $("div.nickname_spacial_letters").addClass('hide');
+          $("#nickname_input").addClass('error-border');
+
+          document.getElementById('temp_nickname_error').value = 1;
+        }
+      }
+      document.getElementById('nickname_input').focus();
+    }
+  });
+</script>
+</body>
+</html>

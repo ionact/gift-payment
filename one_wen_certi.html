@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Payment Connection</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+  <script src="./assets/js/jquery-3.5.1.js"></script>
+  <script src="./assets/js/jquery3.5.1.min.js"></script>
+  <script src="./assets/js/main.js"></script>
+  <link rel="stylesheet" href="assets/css/home.css">
+</head>
+
+<body class="h100p">
+<div class="page-body">
+  <div class="page-container">
+    <div class="body-h100">
+      <!--  헤더    -->
+      <header class="sticky-top">
+        <div class="pr16 pl16 h52 flex-space">
+          <div class="justify-left">
+            <div class="arc_one_back justify-left">
+              <img src="assets/images/back_20.svg" class="img20 mouse-cursor" alt=""/>
+            </div>
+            <span class="pl8 font-noto500 font20 col-77">계좌연결</span>
+          </div>
+          <div id="payment_connection_close" class="justify-right">
+            <img src="assets/images/close_20.svg" class="img20 mouse-cursor" alt=""/>
+          </div>
+        </div>
+        <div class="stick2">
+          <div class="progress-stick" style="width: 70%;"></div>
+        </div>
+      </header>
+
+      <section class="pt24 pr16 pb32 pl16 h124-remain bg-f5">
+        <div class="font16 col-00">
+          <div class="font-noto400">계좌 확인을 위해 입력하신 계좌로</div>
+          <div class="font-noto700">1원을 보냈습니다.</div>
+        </div>
+
+        <div class="pt24">
+          <div class="src-certi pt16 pr16 pb16 pl16 flex-column-l">
+            <div class="justify-center">
+              <div id="icon_img" class="justify-center"></div>
+              <div id="wen_account_title"></div>
+            </div>
+
+            <div class="pt13 pr8 pl8 font-noto300 font13 col42 align-left">
+              <span class="txt-bold col-00">1. </span>입력하신 계좌의 거래 내역을 확인
+            </div>
+
+            <div class="pt4 pr8 pl8 font-noto300 font13 col42 align-left">
+              <span class="txt-bold col-00">2. </span>입금자면 페이북 뒤에 적힌 3자리 숫자를 입력
+            </div>
+
+            <div class="mt16 border-bottom-f5"></div>
+
+            <div class="pt16 font-poppins font400 font12 col-cc align-center">(유효기간 23:59:59)</div>
+
+            <div class="flex-space pt8 font-noto300 font13 col-8f">
+              <div>입금자</div>
+              <div>입금</div>
+            </div>
+
+            <div class="flex-space">
+              <div class="font-noto700 font16 col-00">비씨카드</div>
+              <label>
+                <input id="three_number" class="input145 letter04" type="number" min="0" max="999"
+                       placeholder="3자리 숫자 입력">
+              </label>
+              <div class="font-noto700 font16 col-00">1원</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <footer class="h72 pt8 pr16 pb16 pl16">
+        <input type="hidden" id="error_count">
+        <div id="btn_number_certi" class="btn-next box-shadow font-noto700 font16 col-ff mouse-cursor">다음</div>
+      </footer>
+    </div>
+  </div>
+
+  <!-- 3회 실패 오류 팝업 표시 -->
+  <div class="modal-body three_error hide">
+    <div class="modal-content animate-zoom modal-h213">
+      <div class="h44-remain flex-column">
+        <div class="font-noto500 font15 col-00">인증 번호를 잘못 입력하였습니다.</div>
+        <div class="pt5 font-noto500 font15 col-00">거래내역에서 비씨카드 뒤에 적힌</div>
+        <div class="pt5 font-noto500 font15 col-00">3자리 숫자를 정확히 입력해 주세요.</div>
+      </div>
+      <div id="three_error_modal_close" class="h44 btn-modal-ok font-noto700 font16 col-49 mouse-cursor">
+        확인
+      </div>
+    </div>
+  </div>
+
+  <!-- 일시적인 오류 팝업 표시 -->
+  <div class="modal-body temp_error hide">
+    <div class="modal-content animate-zoom modal-h213">
+      <div class="h44-remain flex-column">
+        <div class="font-noto500 font15 col-00">일시적인 오류로 계좌를 연결하지 못했습니다.</div>
+        <div class="pt5 font-noto500 font15 col-00">계좌가 계속 연결죄디 않는 경우</div>
+        <div class="pt5 font-noto500 font15 col-00">UZZIM 머니 고객센터 (1111-2222)로</div>
+        <div class="pt5 font-noto500 font15 col-00">연락해 주세요.</div>
+      </div>
+      <div class="pr32 pl32 h44 flex-space font-noto700 font16 col-49">
+        <div id="temp_error_next" class="btn-error-next font-noto700 font16 col-77 mouse-cursor">다음에 할게요</div>
+        <div id="temp_error_retry" class="btn-error-next font-noto700 font16 col-77 mouse-cursor">다시시도</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 헤더의 X버튼 클릭시 팝업 표시 -->
+  <div class="modal-body close_by_header hide">
+    <div class="modal-content animate-zoom modal-h213">
+      <div class="h44-remain flex-column">
+        <div class="font-noto500 font15 col-00">얼마 안 남았는데,</div>
+        <div class="pt5 font-noto500 font15 col-00">조금만 더 힘내 주세요!</div>
+      </div>
+      <div class="pr32 pl32 h44 flex-space font-noto700 font16 col-49">
+        <div id="close_connection" class="btn-error-next font-noto700 font16 col-77 mouse-cursor">다음에 할게요</div>
+        <div id="header_continue" class="btn-error-next font-noto700 font16 col-77 mouse-cursor">이어서 하기</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  /**
+   * 패스로부터 선택된 계좌 인덱스 얻어내기
+   */
+  let urlParams = new URLSearchParams(window.location.search);
+  let accountIndex = urlParams.get("accountIndex");
+  if (accountIndex) {
+    // 페이지 초기 진입시 셋팅하기
+    console.log(paymentAccounts[accountIndex - 1]);
+    document.getElementById('icon_img').innerHTML =
+        `<img src="` + paymentAccounts[accountIndex - 1].img + `" class="img20 mr4" alt=""/>`;
+    document.getElementById('wen_account_title').innerHTML = `<div class="font-noto700 font16 col-00">` + paymentAccounts[accountIndex - 1].name + ` 거래내역</div>`;
+    document.getElementById('three_number').focus();
+  }
+
+  /**
+   * back버튼 클릭시
+   */
+  $("div.arc_one_back").on('click', function () {
+    if (accountIndex) {
+      window.location.href = './ars_certi_complete.html?accountIndex=' + accountIndex;
+    }
+  });
+
+  /**
+   * 계좌번호 입력상태에 따르는 다음 버튼 활성화하기
+   */
+  $("#three_number").on("input", function () {
+    /** 입력시 3자리까지로 제한주기 **/
+    document.getElementById('three_number').value = $(this).val().slice(0, 3);
+
+    if ($(this).val()) {
+      // 다음 버튼 활성화
+      $("div.btn-next").addClass('btn-active');
+    } else {
+      // 다음 버튼 비활성화
+      $("div.btn-next").removeClass('btn-active');
+    }
+  });
+
+  /**
+   * 다음 버튼 클릭시
+   * 3회시도 오류 팝업 표시하기
+   */
+  $('#btn_number_certi').click(function () {
+    let temp = document.getElementById('three_number').value;
+
+    let errorCount = document.getElementById('error_count').value || 0;
+
+    // 다음버튼 클릭시마다 시도횟수 계수
+    document.getElementById('error_count').value = errorCount + 1;
+
+    // 입력된 값이 빈값이 아니고 3번째 버튼 클릭상태이면 오류 팝업 표시
+    if (temp && errorCount >= 2) {
+      $("div.three_error").removeClass('hide');
+    }
+  });
+  /** 3회오류 팝업 닫기 -> 확인을 위해 일시적인 오류 팝업 표시해줌 **/
+  $('#three_error_modal_close').click(function () {
+    // 3회시도 오류 팝업 닫기
+    $("div.three_error").addClass('hide');
+
+    // 일시적인 오류팝업 표시
+    $("div.temp_error").removeClass('hide');
+  });
+
+  /**
+   * 일시적인 오류팝업
+   */
+  /** 다시 시도 버튼 클릭시 **/
+  $('#temp_error_retry').click(function () {
+    $("div.temp_error").addClass('hide');
+    document.getElementById('three_number').value = "";
+    document.getElementById('error_count').value = 0;
+    window.location.href = "index.html";
+  });
+  /** 다음에 할게요 버튼 클릭시 **/
+  $('#temp_error_next').click(function () {
+    $("div.temp_error").addClass('hide');
+    document.getElementById('error_count').value = 0;
+    document.getElementById('three_number').value = "";
+    window.location.href = 'account_nickname_setting.html?accountIndex=' + accountIndex;     // 확인을 위해 임시로 이동시킴
+    // window.location.href = "#";                                                           // 유찜의 기존화면으로 이동해야 함
+  });
+
+  /** 헤더 X버튼 클릭시  **/
+  $('#payment_connection_close').click(function () {
+    $("div.close_by_header").removeClass('hide');
+  });
+  /** 이어서 하기 버튼 클릭시 **/
+  $('#header_continue').click(function () {
+    $("div.close_by_header").add('hide');
+    document.getElementById('three_number').value = "";
+    document.getElementById('error_count').value = 0;
+  });
+  /** 다음에 할게요 버튼 클릭시 **/
+  $('#close_connection').click(function () {
+    $("div.close_by_header").addClass('hide');
+    document.getElementById('error_count').value = 0;
+    document.getElementById('three_number').value = "";
+    window.location.href = "#";                                                             // 유찜의 기존화면으로 이동해야 함
+  });
+</script>
+</body>
+</html>
